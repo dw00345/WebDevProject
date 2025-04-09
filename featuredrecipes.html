@@ -1,48 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Featured Recipes</title>
-    <link rel="stylesheet" href="project.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Featured Recipes</title>
+  <link rel="stylesheet" href="project.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.html">
-            <img src="logo.jpg" alt="Recipe Collection Logo" class="logo-image">
-            <h1>Recipe Collection</h1>
-        </div>
-        <div class="top-nav">
-            <input type="text" placeholder="Search...">
-            <a href="login.html">Log in</a>
-            <a href="contactus.html">Contact Us</a>
-        </div>
-    </header>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="logo.jpg" alt="Recipe Collection Logo" class="logo-image">
+      </a>
+      <h1>Recipe Collection</h1>
+    </div>
+    <div class="top-nav">
+      <a href="login.html">Log in</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+  </header>
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="recipecategories.html">Recipe Categories</a></li>
-            <li><a href="featuredrecipes.html">Featured Recipes</a></li>
-            <li><a href="news.html">News</a></li>
-            <li><a href="aboutus.html">About Us</a></li>
-        </ul>
-    </nav>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="recipecategories.html">Recipe Categories</a></li>
+      <li><a href="featuredrecipes.html">Featured Recipes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <h2>Featured Recipes</h2>
-        <p>Discover our top recommended recipes:</p>
-        <ul>
-            <li><a href="#">Gourmet Bacon Burger</a></li>
-            <li><a href="#">Grilled Chicken Nachos</a></li>
-            <li><a href="#">Chocolate Cake</a></li>
-            <li><a href="#">Vegetable Stir-Fry</a></li>
-        </ul>
-    </main>
+  <!-- Slideshow container -->
+  <main>
+    <div class="slideshow-container">
+      <div class="slide">
+        <a href="pancakes.html">
+          <img src="pancakes.jpg" alt="Pancakes" class="hero-image">
+        </a>
+      </div>
+      <div class="slide">
+        <a href="omelette.html">
+          <img src="omelette.jpg" alt="Omelette" class="hero-image">
+        </a>
+      </div>
+      <div class="slide">
+        <a href="chickenandwaffles.html">
+          <img src="chickenandwaffles.jpg" alt="Chicken and Waffles" class="hero-image">
+        </a>
+      </div>
+      <div class="slide">
+        <a href="avocadotoast.html">
+          <img src="avocadotoast.jpg" alt="Avocado Toast" class="hero-image">
+        </a>
+      </div>
 
-    <footer>
-        <p>&copy; 2025 Recipe Collection. All Rights Reserved.</p>
-        <p><a href="mailto:dw00345@my.westga.edu">Contact Us</a></p>
-    </footer>
+      <!-- Navigation buttons -->
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Recipe Collection. All Rights Reserved.</p>
+    <p><a href="mailto:dw00345@my.westga.edu">Contact Us</a></p>
+  </footer>
+
+  <script>
+    $(document).ready(function () {
+      var currentSlideIndex = 0;
+      var slides = $(".slide");
+      var totalSlides = slides.length;
+
+      function showSlide(index) {
+        slides.hide();
+        $(slides[index]).show();
+      }
+
+      function nextSlide() {
+        currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+        showSlide(currentSlideIndex);
+      }
+
+      function prevSlide() {
+        currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlideIndex);
+      }
+
+      showSlide(currentSlideIndex);
+
+      $(".next").click(function () {
+        nextSlide();
+      });
+
+      $(".prev").click(function () {
+        prevSlide();
+      });
+
+      setInterval(nextSlide, 5000);
+    });
+  </script>
 </body>
 </html>
