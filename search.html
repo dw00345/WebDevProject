@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.jpg" alt="Recipe Collection Logo" class="logo-image">
+                <h1>Recipe Collection</h1>
+            </a>
+        </div>
+        <div class="top-nav">
+            <input type="text" id="searchBox" placeholder="Search...">
+            <a href="login.html">Log in</a>
+            <a href="contactus.html">Contact Us</a>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="recipecategories.html">Recipe Categories</a></li>
+            <li><a href="featuredrecipes.html">Featured Recipes</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Search Results</h2>
+        <div id="results"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Recipe Collection. All Rights Reserved.</p>
+        <p><a href="mailto:dw00345@my.westga.edu">Contact Us</a></p>
+    </footer>
+
+    <script>
+        const recipes = [
+            { name: "Avocado Toast", url: "avocadotoast.html" },
+            { name: "Gourmet Bacon Burger", url: "gourmetbaconburger.html" },
+            { name: "Spaghetti", url: "spaghetti.html" },
+            { name: "Caesar Salad", url: "caesarsalad.html" },
+            { name: "Banana Bread", url: "bananabread.html" },
+            { name: "Breakfast", url: "breakfast.html" },
+            { name: "Chicken and Waffles", url: "chickenandwaffles.html" },
+            { name: "Chicken Fried Rice", url: "chickenfriedrice.html" },
+            { name: "Chicken Sandwich", url: "chickensandwich.html" },
+            { name: "Chips", url: "chips.html" },
+            { name: "Chocolate Chip Cookies", url: "cookies.html" },
+            { name: "Desserts", url: "dessert.html" },
+            { name: "Dinners", url: "dinner.html" },
+            { name: "Filet Mignon", url: "filetmignon.html" },
+            { name: "Grilled Cheese", url: "grilledcheese.html" },
+            { name: "Lunches", url: "lunch.html" },
+            { name: "Pasta Salad", url: "pastasalad.html" },
+            { name: "Pizza Bagels", url: "pizzabagels.html" },
+            { name: "Snacks", url: "snacks.html" },
+            { name: "Omelette", url: "omelette.html" },
+            { name: "Pancakes", url: "pancakes.html" }
+        ];
+
+        // Get query string from URL
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get("q") ? params.get("q").toLowerCase() : "";
+
+        const resultsDiv = document.getElementById("results");
+
+        if (query.trim() === "") {
+            resultsDiv.innerHTML = "<p>Please enter a search term.</p>";
+        } else {
+            const matches = recipes.filter(recipe =>
+                recipe.name.toLowerCase().includes(query)
+            );
+
+            if (matches.length > 0) {
+                const ul = document.createElement("ul");
+                matches.forEach(recipe => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = recipe.url;
+                    a.textContent = recipe.name;
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
+                resultsDiv.appendChild(ul);
+            } else {
+                resultsDiv.innerHTML = "<p>No recipes found matching your search.</p>";
+            }
+        }
+
+        // Enable search bar Enter key to trigger new search
+        document.getElementById("searchBox").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                const newQuery = document.getElementById("searchBox").value.trim();
+                if (newQuery !== "") {
+                    window.location.href = "search.html?q=" + encodeURIComponent(newQuery);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
